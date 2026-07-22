@@ -79,6 +79,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; color: var
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 0; }
 
 .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+.brand-crest { height: 44px; width: auto; flex: none; border-radius: 8px; }
 .brand-mark {
   width: 42px; height: 42px; border-radius: 11px; flex: none;
   background: linear-gradient(135deg, var(--navy-800), var(--navy-950));
