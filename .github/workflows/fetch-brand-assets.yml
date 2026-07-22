@@ -1,0 +1,77 @@
+name: Fetch brand assets from live site
+
+on:
+  push:
+    branches: [claude/fallon-automotive-redesign-v8qndq]
+    paths: ['.github/workflows/fetch-brand-assets.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Capture rendered pages and images with real Chrome
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright-core >/dev/null
+          cat > grab.js <<'EOF'
+          const { chromium } = require('playwright-core');
+          const fs = require('fs');
+          const crypto = require('crypto');
+          const OUT = 'fallon/source-assets';
+          const PAGES = [
+            ['home', 'https://www.fallonautomotive.com/'],
+            ['services', 'https://www.fallonautomotive.com/copy-of-services'],
+            ['warranty', 'https://www.fallonautomotive.com/nationwidewarranty'],
+            ['roadside', 'https://www.fallonautomotive.com/roadsiteassistance'],
+            ['contact', 'https://www.fallonautomotive.com/contact'],
+          ];
+          (async () => {
+            fs.mkdirSync(OUT + '/img', { recursive: true });
+            const browser = await chromium.launch({ channel: 'chrome' });
+            const ctx = await browser.newContext({ viewport: { width: 1400, height: 900 } });
+            const seen = new Map();
+            for (const [name, url] of PAGES) {
+              const page = await ctx.newPage();
+              page.on('response', async (res) => {
+                try {
+                  const ct = res.headers()['content-type'] || '';
+                  if (!/image\//.test(ct)) return;
+                  const buf = await res.body();
+                  if (buf.length < 4000) return;
+                  const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : ct.includes('svg') ? 'svg' : ct.includes('gif') ? 'gif' : 'jpg';
+                  const hash = crypto.createHash('md5').update(buf).digest('hex').slice(0, 10);
+                  if (seen.has(hash)) return;
+                  seen.set(hash, res.url());
+                  fs.writeFileSync(`${OUT}/img/${hash}.${ext}`, buf);
+                } catch (e) {}
+              });
+              try {
+                await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+                await page.waitForTimeout(4000);
+                await page.evaluate(() => new Promise(r => { let y = 0; const s = () => { y += 600; scrollTo(0, y); y < document.body.scrollHeight ? setTimeout(s, 250) : setTimeout(r, 2000); }; s(); }));
+                fs.writeFileSync(`${OUT}/${name}.html`, await page.content());
+                await page.screenshot({ path: `${OUT}/${name}-screenshot.png`, fullPage: true });
+                console.log('OK', name);
+              } catch (e) { console.log('FAIL', name, e.message); }
+              await page.close();
+            }
+            fs.writeFileSync(`${OUT}/img-urls.json`, JSON.stringify(Object.fromEntries(seen), null, 2));
+            await browser.close();
+          })();
+          EOF
+          node grab.js
+          rm -rf node_modules package.json package-lock.json grab.js
+          ls -la fallon/source-assets/img | head -40
+
+      - name: Commit captured assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f fallon/source-assets
+          git diff --cached --quiet || git commit -m "Capture brand assets from live fallonautomotive.com"
+          git push
