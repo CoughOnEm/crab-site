@@ -1,0 +1,16 @@
+{
+  "comment": "AI-generated placeholder photography (Higgsfield). Replace with real shop photos before final client delivery. build.sh downloads these into each site's img/ folder at deploy time; site JS falls back to the CDN URL when the local file is absent.",
+  "base": "https://d8j0ntlcm91z4.cloudfront.net/user_3CoFtxTYCt49Ypjs9T2Uvarqo9K/",
+  "images": {
+    "hero-shop.webp": "hf_20260722_212727_f32ec25e-c1bc-46c3-86b1-607567d72fcf_min.webp",
+    "brake-service.webp": "hf_20260722_213139_d598c2cc-19b7-48e9-b279-9044b88dfd45_min.webp",
+    "diagnostics.webp": "hf_20260722_213145_5498283a-03a9-4ddd-900c-e473486f7c1a_min.webp",
+    "service-advisor.webp": "hf_20260722_213149_9d3a8897-8994-48ec-9642-d223522d3ecf_min.webp",
+    "storefront-dusk.webp": "hf_20260722_213152_5da17748-7005-4f6e-842f-03b8162d9805_min.webp",
+    "alignment.webp": "hf_20260722_213228_120fa35b-72a6-4aa9-bc69-13c04d18caab_min.webp",
+    "detail-tools.webp": "hf_20260722_213243_0c05e047-1dad-4c53-8de5-4ad333242d67_min.webp",
+    "hybrid-service.webp": "hf_20260722_213304_9ce67196-e217-467a-8387-49797ae7a663_min.webp",
+    "portrait-tech.webp": "hf_20260722_213311_61b8d5bd-ee74-455c-858b-1fba4ff1f3df_min.webp",
+    "mechanic-underbody.webp": "hf_20260722_214701_3dbc83a7-4375-4e14-8077-cd2c6ff8093c_min.webp"
+  }
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallon Automotive — Website Redesign Concepts</title>
+  <meta name="description" content="Two redesign concepts for fallonautomotive.com: Premium and Flagship.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0A0A0C">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230A0A0C'/%3E%3Cpath d='M20 46V18h26v7H29v5h14v7H29v9z' fill='%23F4F1EC'/%3E%3Crect x='20' y='42' width='9' height='4' fill='%23E23B2E'/%3E%3C/svg%3E">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #0A0A0C; --coal: #101014; --panel: #16161B;
+      --line: rgba(244,241,236,.1); --line-strong: rgba(244,241,236,.2);
+      --paper: #F4F1EC; --dim: #B9B4AB; --faint: #7E7A73;
+      --red: #E23B2E; --amber: #D9A441; --navy: #0C2340;
+    }
+    body {
+      background: var(--black); color: var(--paper);
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      line-height: 1.65; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+    header { padding: clamp(3.5rem, 9vw, 6.5rem) 0 clamp(2rem, 5vw, 3.5rem); border-bottom: 1px solid var(--line); }
+    .kicker { font-size: .75rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+    h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 800; }
+    h1 .dim { color: var(--faint); }
+    .sub { margin-top: 1.2rem; color: var(--dim); max-width: 56ch; font-size: 1.05rem; }
+    main { padding: clamp(2.5rem, 6vw, 4rem) 0 2rem; }
+    .cards { display: grid; gap: 1.4rem; }
+    @media (min-width: 900px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card {
+      border: 1px solid var(--line); border-radius: 10px; background: var(--coal);
+      padding: 1.9rem; display: flex; flex-direction: column; gap: .9rem; position: relative;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .tier { font-size: .68rem; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+    .card h2 { font-size: 1.45rem; font-weight: 800; letter-spacing: -.01em; }
+    .card p { color: var(--dim); font-size: .93rem; }
+    .card ul { list-style: none; display: grid; gap: .45rem; margin-top: .2rem; }
+    .card li { position: relative; padding-left: 1.4rem; font-size: .88rem; color: var(--dim); }
+    .card li::before { content: "—"; position: absolute; left: 0; color: var(--red); }
+    .card.current li::before { content: "×"; color: var(--faint); }
+    .btn {
+      margin-top: auto; display: inline-flex; justify-content: center; align-items: center;
+      text-decoration: none; font-weight: 700; font-size: .92rem; padding: .9rem 1.4rem; border-radius: 6px;
+      transition: filter .2s, transform .2s;
+    }
+    .btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .btn.ghost { border: 1px solid var(--line-strong); color: var(--dim); }
+    .btn.navy { background: var(--navy); color: #fff; }
+    .btn.red { background: var(--red); color: #fff; }
+    .flag { position: absolute; top: -0.85rem; right: 1.2rem; background: var(--red); color: #fff; font-size: .64rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; padding: .35rem .8rem; border-radius: 999px; }
+    .facts { margin-top: clamp(2.5rem, 6vw, 4rem); border: 1px solid var(--line); border-radius: 10px; background: var(--coal); padding: 1.9rem; }
+    .facts h3 { font-size: .8rem; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); margin-bottom: 1rem; }
+    .facts .grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 760px) { .facts .grid { grid-template-columns: repeat(4, 1fr); } }
+    .facts b { display: block; font-size: 1.7rem; font-weight: 800; }
+    .facts b em { font-style: normal; color: var(--amber); }
+    .facts span { color: var(--faint); font-size: .8rem; }
+    .notes { margin-top: 2rem; color: var(--faint); font-size: .82rem; max-width: 72ch; }
+    .notes li { margin: .35rem 0 .35rem 1.1rem; }
+    footer { border-top: 1px solid var(--line); margin-top: clamp(2.5rem, 6vw, 4rem); padding: 1.6rem 0 2.4rem; color: var(--faint); font-size: .8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="kicker">Website redesign proposal</div>
+      <h1>Fallon Automotive,<br><span class="dim">rebuilt to match the reputation.</span></h1>
+      <p class="sub">A 4.9-star, two-location, 25-year shop deserves better than a stock template. Here are two concepts — open them side by side with the current site and compare.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="cards">
+        <div class="card current">
+          <div class="tier">Today</div>
+          <h2>Current site</h2>
+          <p>A stock Wix template. Slow to load, dated on mobile, and it buries the shop's strongest asset — its reputation.</p>
+          <ul>
+            <li>Template look — nothing says "Fallon"</li>
+            <li>URLs like /copy-of-services and /roadsiteassistance</li>
+            <li>4.9-star reputation barely visible</li>
+            <li>No real booking flow</li>
+          </ul>
+          <a class="btn ghost" href="https://www.fallonautomotive.com/" target="_blank" rel="noopener">Open current site ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="tier">Concept One</div>
+          <h2>Premium</h2>
+          <p>A clean, fast, five-page site that puts trust signals front and center and makes booking effortless.</p>
+          <ul>
+            <li>Home, Services, About, Warranty, Contact</li>
+            <li>Reviews &amp; warranty on every page path</li>
+            <li>Click-to-call, map links, booking form</li>
+            <li>Full SEO: meta, structured data, fast scores</li>
+          </ul>
+          <a class="btn navy" href="../premium/index.html">View Premium concept →</a>
+        </div>
+
+        <div class="card">
+          <div class="flag">Flagship</div>
+          <div class="tier">Concept Two</div>
+          <h2>Ultra Premium</h2>
+          <p>A cinematic flagship experience — the site of a shop that outclasses the dealerships it competes with.</p>
+          <ul>
+            <li>Immersive design with scroll animations</li>
+            <li>Interactive service explorer</li>
+            <li>Three-step guided booking flow</li>
+            <li>Review carousel, live counters, custom photography</li>
+          </ul>
+          <a class="btn red" href="../index.html">View Ultra concept →</a>
+        </div>
+      </div>
+
+      <div class="facts">
+        <h3>The business these sites sell</h3>
+        <div class="grid">
+          <div><b>25<em>+</em></b><span>Years in Sterling, VA</span></div>
+          <div><b>2</b><span>Full-service locations</span></div>
+          <div><b>4.9<em>★</em></b><span>Google rating</span></div>
+          <div><b>477</b><span>Google reviews</span></div>
+        </div>
+      </div>
+
+      <ul class="notes">
+        <li>Photography is AI-generated placeholder art — swapped for real photos of the actual shop before launch.</li>
+        <li>Review quotes are placeholders; final site uses real Google reviews (with permission). The 4.9★/477 figures are real.</li>
+        <li>Booking forms are fully built; they compose an email today and connect to a form service or shop system in minutes at launch.</li>
+        <li>Business details (phones, hours, addresses) pulled from public listings — verify with the shop before go-live.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">Prepared as a design proposal. Not affiliated with or endorsed by Fallon Automotive — all business facts from public listings.</div>
+  </footer>
+</body>
+</html>
