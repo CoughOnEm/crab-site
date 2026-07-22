@@ -1,0 +1,47 @@
+name: Deploy Fallon site to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/fallon-automotive-redesign-v8qndq]
+    paths: ['fallon/**', '.github/workflows/deploy-pages.yml']
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site — flagship at root, photography baked in
+        run: |
+          bash fallon/build.sh
+          mkdir -p _site/premium _site/pitch
+          cp -r fallon/ultra/. _site/
+          cp -r fallon/premium/. _site/premium/
+          cp fallon/index.html _site/pitch/index.html
+          # pitch page lives one level down; repoint its concept links
+          sed -i 's|href="premium/"|href="../premium/"|; s|href="ultra/"|href="../"|' _site/pitch/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
