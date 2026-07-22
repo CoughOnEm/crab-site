@@ -63,6 +63,10 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
     document.querySelectorAll('.rv').forEach(function (el) { rio.observe(el); });
+    // Safety net: nothing stays hidden if an observation is ever missed.
+    setTimeout(function () {
+      document.querySelectorAll('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); });
+    }, 3000);
   } else {
     document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
   }

@@ -329,9 +329,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; color: var
 .crumbs a { color: #C9D6E6; text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; }
 
-/* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+/* Reveal on scroll — hidden state only applies once JS confirms it's running
+   (html.js), so content is never invisible without the script to reveal it. */
+html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+html.js .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }

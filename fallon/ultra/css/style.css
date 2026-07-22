@@ -345,9 +345,10 @@ ul, ol { list-style: none; }
 .ftr .blurb { color: var(--paper-dim); font-size: .92rem; max-width: 34ch; margin-top: 1rem; }
 .ftr-bottom { border-top: 1px solid var(--line); padding: 1.4rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .8rem; font-size: .8rem; color: var(--paper-faint); }
 
-/* Reveal system */
-.rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-.rv.in { opacity: 1; transform: none; }
+/* Reveal system — hidden state only applies once JS confirms it's running
+   (html.js), so content is never invisible without the script to reveal it. */
+html.js .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+html.js .rv.in { opacity: 1; transform: none; }
 .rv-d1 { transition-delay: .08s; } .rv-d2 { transition-delay: .16s; } .rv-d3 { transition-delay: .24s; }
 
 @media (prefers-reduced-motion: reduce) {

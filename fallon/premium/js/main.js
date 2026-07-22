@@ -42,6 +42,10 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    // Safety net: nothing stays hidden if an observation is ever missed.
+    setTimeout(function () {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) { el.classList.add('visible'); });
+    }, 3000);
   } else {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
   }
