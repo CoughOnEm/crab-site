@@ -312,11 +312,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; color: var
 .site-footer { background: var(--navy-950); color: #A9BBD1; font-size: .95rem; }
 .footer-grid { display: grid; gap: 2.2rem; padding: clamp(2.8rem, 6vw, 4rem) 0 2rem; grid-template-columns: 1fr; }
 @media (min-width: 800px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; } }
-.site-footer h4 { color: #fff; font-size: .95rem; margin-bottom: 1rem; letter-spacing: .04em; }
+.site-footer h3 { color: #fff; font-size: .95rem; margin-bottom: 1rem; letter-spacing: .04em; }
 .site-footer a { color: #C9D6E6; text-decoration: none; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
 .site-footer li { margin-bottom: .55rem; }
 .footer-brand p { margin-top: .9rem; max-width: 36ch; font-size: .9rem; }
+.site-footer .brand-name small { color: var(--amber); }
 .footer-bottom { border-top: 1px solid rgba(255, 255, 255, .1); padding: 1.3rem 0; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .85rem; color: #7E93AC; }
 
 /* --------------------------------------------------------------------------

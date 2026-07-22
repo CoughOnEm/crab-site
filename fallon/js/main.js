@@ -75,6 +75,9 @@
   function animateCount(el) {
     var target = parseFloat(el.dataset.count);
     var decimals = (el.dataset.count.split('.')[1] || '').length;
+    // reserve final width so the count-up never shifts layout
+    el.style.display = 'inline-block';
+    el.style.minWidth = el.dataset.count.length + 'ch';
     var dur = 1600, t0 = null;
     if (reduceMotion) { el.textContent = el.dataset.count; return; }
     function tick(t) {

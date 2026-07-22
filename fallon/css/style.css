@@ -146,7 +146,7 @@ ul, ol { list-style: none; }
 .marquee { overflow: hidden; border-bottom: 1px solid var(--line); background: var(--coal); padding: 1.1rem 0; }
 .marquee-track { display: flex; gap: 3.2rem; width: max-content; animation: marquee 36s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-track span { font-family: var(--display); font-size: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--paper-faint); white-space: nowrap; }
+.marquee-track span { font-family: var(--display); font-size: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--paper-dim); white-space: nowrap; }
 .marquee-track span::after { content: "•"; margin-left: 3.2rem; color: var(--red); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -338,7 +338,7 @@ ul, ol { list-style: none; }
 .ftr { border-top: 1px solid var(--line); background: var(--black); }
 .ftr-in { display: grid; gap: 2.5rem; padding: clamp(3rem, 7vw, 5rem) 0 2.4rem; }
 @media (min-width: 880px) { .ftr-in { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; } }
-.ftr h4 { font-size: .72rem; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; color: var(--paper-faint); margin-bottom: 1.1rem; }
+.ftr h3 { font-size: .72rem; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; color: var(--paper-faint); margin-bottom: 1.1rem; }
 .ftr a { color: var(--paper-dim); text-decoration: none; transition: color .2s; }
 .ftr a:hover { color: var(--paper); }
 .ftr li { margin-bottom: .6rem; font-size: .95rem; }
