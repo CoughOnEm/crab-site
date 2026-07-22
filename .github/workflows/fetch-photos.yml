@@ -1,0 +1,30 @@
+name: Fetch photography assets
+
+on:
+  push:
+    branches: [claude/fallon-automotive-redesign-v8qndq]
+    paths: ['.github/workflows/fetch-photos.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download photography into the repo
+        run: |
+          bash fallon/build.sh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f fallon/img fallon/premium/img
+          git diff --cached --quiet || git commit -m "Add photography assets (fetched at build)"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: photos
+          path: fallon/img
