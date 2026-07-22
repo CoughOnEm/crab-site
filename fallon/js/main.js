@@ -229,6 +229,17 @@
     showStep(0);
   }
 
+  /* ---- In-page anchors: explicit scroll so they work in any embed/sandbox ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var target = document.querySelector(a.getAttribute('href') === '#top' ? '#top' : a.getAttribute('href'));
+      if (!target) return;
+      ev.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      if (typeof target.focus === 'function') target.focus({ preventScroll: true });
+    });
+  });
+
   /* ---- Footer year ---- */
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
