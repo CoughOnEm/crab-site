@@ -11,6 +11,7 @@ permissions:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -27,9 +28,9 @@ jobs:
             ['home', 'https://www.fallonautomotive.com/'],
             ['services', 'https://www.fallonautomotive.com/copy-of-services'],
             ['warranty', 'https://www.fallonautomotive.com/nationwidewarranty'],
-            ['roadside', 'https://www.fallonautomotive.com/roadsiteassistance'],
             ['contact', 'https://www.fallonautomotive.com/contact'],
           ];
+          const sleep = (ms) => new Promise(r => setTimeout(r, ms));
           (async () => {
             fs.mkdirSync(OUT + '/img', { recursive: true });
             const browser = await chromium.launch({ channel: 'chrome' });
@@ -50,23 +51,35 @@ jobs:
                   fs.writeFileSync(`${OUT}/img/${hash}.${ext}`, buf);
                 } catch (e) {}
               });
-              try {
-                await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
-                await page.waitForTimeout(4000);
-                await page.evaluate(() => new Promise(r => { let y = 0; const s = () => { y += 600; scrollTo(0, y); y < document.body.scrollHeight ? setTimeout(s, 250) : setTimeout(r, 2000); }; s(); }));
-                fs.writeFileSync(`${OUT}/${name}.html`, await page.content());
-                await page.screenshot({ path: `${OUT}/${name}-screenshot.png`, fullPage: true });
-                console.log('OK', name);
-              } catch (e) { console.log('FAIL', name, e.message); }
-              await page.close();
+              // hard cap per page so one hung load can't stall the whole job
+              await Promise.race([
+                (async () => {
+                  try {
+                    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                    await sleep(6000);
+                    for (let y = 600; y <= 9000; y += 600) { await page.evaluate(v => scrollTo(0, v), y).catch(() => {}); await sleep(200); }
+                    await sleep(1500);
+                    fs.writeFileSync(`${OUT}/${name}.html`, await page.content());
+                    console.log('OK', name);
+                  } catch (e) { console.log('FAIL', name, e.message); }
+                })(),
+                sleep(80000).then(() => console.log('TIMEOUT', name)),
+              ]);
+              await page.close().catch(() => {});
             }
             fs.writeFileSync(`${OUT}/img-urls.json`, JSON.stringify(Object.fromEntries(seen), null, 2));
-            await browser.close();
+            await browser.close().catch(() => {});
           })();
           EOF
           node grab.js
           rm -rf node_modules package.json package-lock.json grab.js
-          ls -la fallon/source-assets/img | head -40
+          ls fallon/source-assets/img | wc -l
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: brand-assets
+          path: fallon/source-assets
 
       - name: Commit captured assets
         run: |
