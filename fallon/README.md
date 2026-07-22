@@ -1,16 +1,18 @@
-# Fallon Automotive — redesign concepts
+# Fallon Automotive — flagship redesign
 
-Two complete website concepts for pitching a rebuild of fallonautomotive.com,
-plus a comparison page for the sales meeting. Everything is static — no
-framework, no build tooling required.
+A complete website concept for pitching a rebuild of fallonautomotive.com.
+The cinematic flagship site is the root; a cleaner/simpler alternate concept
+and a sales pitch page ride along. Everything is static — no framework, no
+build tooling required.
 
 ```
 fallon/
-├── index.html      ← pitch page: current site vs Premium vs Ultra
-├── premium/        ← Concept One: clean 5-page site (light, navy/red)
-├── ultra/          ← Concept Two: flagship one-page experience (dark, cinematic)
+├── index.html      ← THE site: flagship one-page experience (dark, cinematic)
+├── css/ js/ fonts/ ← flagship assets
+├── premium/        ← alternate concept: clean 5-page site (light, navy/red)
+├── pitch/          ← sales demo page: current site vs the two concepts
 ├── images.json     ← manifest of the AI-generated photography
-└── build.sh        ← downloads photography into each site at deploy time
+└── build.sh        ← downloads photography into the site at deploy time
 ```
 
 ## Deploying to Cloudflare Pages (free)
@@ -22,14 +24,10 @@ fallon/
    - **Root directory**: `fallon`
    - **Build command**: `bash build.sh`
    - **Build output directory**: `.` (a single dot)
-3. Deploy. You'll get `https://<project>.pages.dev/` (pitch page),
-   `/premium/` and `/ultra/`.
-
-Want two separate clean URLs for the pitch? Create two Pages projects from the
-same repo, one with root directory `fallon/premium`, one with `fallon/ultra`
-(build command `bash ../build.sh` won't run outside the root — for split
-projects just skip the build command; the sites fall back to the image CDN
-automatically).
+3. Deploy. You get:
+   - `https://<project>.pages.dev/` — the flagship site
+   - `https://<project>.pages.dev/premium/` — alternate concept
+   - `https://<project>.pages.dev/pitch/` — sales comparison page
 
 ## Images
 
@@ -37,7 +35,7 @@ Photography is AI-generated (Higgsfield) placeholder art. HTML references
 local `img/*.webp`; when a file is missing the site's JS falls back to the
 original CDN URL, and `build.sh` localizes everything at deploy. **Before
 selling/launching: replace with real photos of the actual shop** — drop files
-with the same names into `premium/img/` and `ultra/img/`.
+with the same names into `img/` and `premium/img/`.
 
 ## Before go-live checklist
 
@@ -45,6 +43,6 @@ with the same names into `premium/img/` and `ultra/img/`.
 - [ ] Replace placeholder review quotes with real Google reviews (get permission)
 - [ ] Replace AI photography with real shop photos
 - [ ] Point the booking forms at a real destination: swap the `mailto:` in
-      each site's `js/main.js` for the shop's email, or wire a form service
-      (e.g. Formspree/Basin — 5 minutes) or their shop-management system
+      `js/main.js` (and `premium/js/main.js`) for the shop's email, or wire a
+      form service (e.g. Formspree/Basin — 5 minutes) or their shop system
 - [ ] Set the real domain + update `og:` URLs and JSON-LD `url` fields

@@ -10,7 +10,7 @@ BASE=$(sed -n 's/.*"base": *"\([^"]*\)".*/\1/p' images.json)
 
 sed -n 's/^ *"\([a-z0-9-]*\.webp\)": *"\(hf_[^"]*\)".*/\1 \2/p' images.json |
 while read -r name file; do
-  for dir in premium/img ultra/img; do
+  for dir in premium/img img; do
     mkdir -p "$dir"
     if [ ! -f "$dir/$name" ]; then
       echo "fetch $dir/$name"
