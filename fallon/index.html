@@ -144,12 +144,12 @@
         </div>
         <div class="explorer">
           <div class="svc-list rv" role="tablist" aria-label="Services" aria-orientation="vertical">
-            <button class="svc-tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true"><span class="no">01</span><span class="nm">State Inspection</span><span class="arr" aria-hidden="true">→</span></button>
-            <button class="svc-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false"><span class="no">02</span><span class="nm">Brakes</span><span class="arr" aria-hidden="true">→</span></button>
-            <button class="svc-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false"><span class="no">03</span><span class="nm">Engine &amp; Diagnostics</span><span class="arr" aria-hidden="true">→</span></button>
-            <button class="svc-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false"><span class="no">04</span><span class="nm">Alignment &amp; Suspension</span><span class="arr" aria-hidden="true">→</span></button>
-            <button class="svc-tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false"><span class="no">05</span><span class="nm">Hybrid Service</span><span class="arr" aria-hidden="true">→</span></button>
-            <button class="svc-tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false"><span class="no">06</span><span class="nm">Maintenance</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true"><span class="no">01</span><span class="nm">State Inspection</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false"><span class="no">02</span><span class="nm">Brakes</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false"><span class="no">03</span><span class="nm">Engine &amp; Diagnostics</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false"><span class="no">04</span><span class="nm">Alignment &amp; Suspension</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false"><span class="no">05</span><span class="nm">Hybrid Service</span><span class="arr" aria-hidden="true">→</span></button>
+            <button type="button" class="svc-tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false"><span class="no">06</span><span class="nm">Maintenance</span><span class="arr" aria-hidden="true">→</span></button>
           </div>
           <div class="svc-panel rv rv-d1">
             <div class="svc-stage" aria-hidden="true">
@@ -256,25 +256,25 @@
             <div class="rev-track">
               <div class="rev-slide">
                 <blockquote>They told me exactly what needed fixing now and what could wait. You don't find that kind of honesty at many shops anymore.</blockquote>
-                <div class="stars" aria-label="5 stars">★★★★★</div>
+                <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                 <footer>Longtime customer — Sterling</footer>
               </div>
               <div class="rev-slide">
                 <blockquote>Fair prices, fast turnaround, and they explain everything in plain English. My whole family brings their cars here.</blockquote>
-                <div class="stars" aria-label="5 stars">★★★★★</div>
+                <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                 <footer>Verified customer — Ashburn</footer>
               </div>
               <div class="rev-slide">
                 <blockquote>State inspection plus a brake job, done the same day. The nationwide warranty sealed it — I'm not going anywhere else.</blockquote>
-                <div class="stars" aria-label="5 stars">★★★★★</div>
+                <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
                 <footer>Verified customer — Herndon</footer>
               </div>
             </div>
           </div>
           <div class="rev-nav">
-            <button class="rev-btn rev-prev" aria-label="Previous review"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button type="button" class="rev-btn rev-prev" aria-label="Previous review"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
             <div class="rev-dots" role="group" aria-label="Choose review"></div>
-            <button class="rev-btn rev-next" aria-label="Next review"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            <button type="button" class="rev-btn rev-next" aria-label="Next review"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
           </div>
           <p class="rev-google"><b>4.9 / 5</b> average across <b>477 Google reviews</b></p>
         </div>
@@ -348,7 +348,7 @@
                 <input id="b-vehicle" name="vehicle" type="text" placeholder="e.g. 2019 Honda CR-V" required>
               </div>
               <div class="bfield full">
-                <label id="b-service-label" for="b-service">What does it need?</label>
+                <label id="b-service-label">What does it need?</label>
                 <input type="hidden" name="service" value="Not sure yet">
                 <div class="chiprow" role="group" aria-labelledby="b-service-label" id="b-service">
                   <button type="button" class="chip on" data-value="Not sure yet">Not sure yet</button>
@@ -375,8 +375,8 @@
           <div class="bstep">
             <div class="bgrid">
               <div class="bfield full">
-                <label id="b-loc-label" for="b-loc">Preferred shop *</label>
-                <input type="hidden" name="location" value="Either — first available" required>
+                <label id="b-loc-label">Preferred shop *</label>
+                <input type="hidden" name="location" value="Either — first available">
                 <div class="chiprow" role="group" aria-labelledby="b-loc-label" id="b-loc">
                   <button type="button" class="chip on" data-value="Either — first available">First available</button>
                   <button type="button" class="chip" data-value="Markey Ct">Markey Ct</button>
